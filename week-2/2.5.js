@@ -1,3 +1,7 @@
+const express = require("express");
+const app = express();
+
+
 function calculateSum(n){
     let ans = 0
     for(let i = 1; i <=n ; i++){
@@ -5,6 +9,13 @@ function calculateSum(n){
     }
     return ans;
 }
+// let ans = calculateSum(3);
+// console.log(ans);
 
-let ans = calculateSum(3);
-console.log(ans);
+app.get('/', function(req ,res){
+    const n = req.query.n;
+    const ans = calculateSum(n);
+    res.send(ans.toString());
+})
+
+app.listen(3000);
