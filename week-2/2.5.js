@@ -1,3 +1,7 @@
+// creating the http server using express
+// node default lib => no
+
+
 const express = require("express");
 const app = express();
 
@@ -17,7 +21,7 @@ function sum( a , b ){
     return ans;
 }
 
-app.get('/', function(req ,res){
+app.get('/', function(req ,res){  // req,re => request , result
     const n = req.query.n;
     const ans = calculateSum(n);
     res.send(ans.toString());  // res.send expects string, buffer or an object, can't pass number directly
