@@ -52,10 +52,26 @@ app.post("/", (req,res) =>{
 });
 
 app.put("/", (req,res) =>{
-    
+    for(let i = 0; i < users[0].kidneys.length; i++){  // can call from global varibables only
+        users[0].kidneys[i].healthy = true;
+    }
+    res.json({
+        msg: "Surgury success"
+    })
 })
 
 app.delete("/", (req,res) =>{
-    
+    const newKidney = []
+    for(let i = 0; i< users[0].kidneys.length; i++){
+        if(users[0].kidneys[i].healthy){
+            newKidney.push({
+                healthy: true
+            })
+        }
+    }
+    users[0].kidneys = newKidney;
+    res.json({
+        msg: "Unhealthy Kidney Removed"
+    })
 })
 
