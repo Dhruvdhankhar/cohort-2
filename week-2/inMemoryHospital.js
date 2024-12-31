@@ -61,7 +61,8 @@ app.put("/", (req,res) =>{
 })
 
 app.delete("/", (req,res) =>{
-    const newKidney = []
+    if(isThereOneUnhealthyKidney()){
+        const newKidney = []
     for(let i = 0; i< users[0].kidneys.length; i++){
         if(users[0].kidneys[i].healthy){
             newKidney.push({
@@ -73,5 +74,20 @@ app.delete("/", (req,res) =>{
     res.json({
         msg: "Unhealthy Kidney Removed"
     })
+    }
+    else({
+        res.status(411).json({
+            msg: "Input Invalid"
+        })
+    })
 })
 
+function isThereOneUnhealthyKidney(){
+    let atLeastOneUnhealthyKidney = false
+    for(let i=0; i <  users[0].kidneys.length; i++){
+        if(!users[0].kidneys[i].healthy){
+            atLeastOneUnhealthyKidney = true
+        }
+    }
+    return atLeastOneUnhealthyKidney;
+}
