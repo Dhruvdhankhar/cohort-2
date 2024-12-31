@@ -1,13 +1,15 @@
 const express = require("express");
 const app = express();
 app.listen(3002);
+app.use(express.json());
 
-let users = [{
+
+const users = [{
     name: 'John',
     kidneys: [{
-        healthy: false
-    },{
         healthy: true
+    },{
+        healthy: false
     }]
 }];
 
@@ -28,16 +30,26 @@ app.get("/", (req,res) =>{
         }
     }
     let noOfUnhealthyKidney = numberOfKidneys - noOfHealthyKidneys;
-    res.send({
+    res.json({
         numberOfKidneys,
         noOfHealthyKidneys,
         noOfUnhealthyKidney
     })
 })
 
-app.post("/", (req,res) =>{
-    
-})
+// for get req. --> req.query (query parameter is valid)
+// for post req. --> req.body (body parameter is used)
+
+
+app.post("/", (req,res) =>{  
+    const isHealthy = req.body.isHealthy;  // cannot parse the body and read isHealthy, therefore to parse a json body on the server
+    users[0].kidneys.push({
+        healthy: isHealthy
+    });
+    res.json({
+        msg: "done!"
+    });
+});
 
 app.put("/", (req,res) =>{
     
