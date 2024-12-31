@@ -36,5 +36,9 @@ app.get('/sum', function(req ,res){
 })
 
 app.listen(3000);
-
+/* STATUS CODE:
+200 --> everything is fine
+404 --> route not found, (Doc is not there)
+500 --> mid surgury life went away
+411 --> input is incorrect, wrong person came for surgury */
  
