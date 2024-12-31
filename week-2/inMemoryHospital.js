@@ -53,8 +53,8 @@ app.post("/", (req,res) =>{
 
 app.put("/", (req,res) =>{
     for(let i = 0; i < users[0].kidneys.length; i++){  // can call from global varibables only
-        users[0].kidneys[i].healthy = true;
-    }
+            users[0].kidneys[i].healthy = true;
+        }
     res.json({
         msg: "Surgury success"
     })
@@ -75,13 +75,13 @@ app.delete("/", (req,res) =>{
         msg: "Unhealthy Kidney Removed"
     })
     }
-    else({
+    else{
         res.status(411).json({
             msg: "Input Invalid"
         })
-    })
+    }
 })
-
+// check for at least one unhealthy kidney, if not then send status error 411
 function isThereOneUnhealthyKidney(){
     let atLeastOneUnhealthyKidney = false
     for(let i=0; i <  users[0].kidneys.length; i++){
