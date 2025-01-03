@@ -1,4 +1,4 @@
-// global catches --> if anyhow, server throw error then that must not be shown to public, therefore GC comes into play to provide clean error to user (eg. 404 500 )
+// Global catches--> help you give the user a better error message
 const express = require("express")
 const app = express();
 app.listen(3000);
@@ -10,3 +10,12 @@ app.post("/", function(req,res){
     res.json("You have " + kidneyLength + " kidneys");
 })
 
+// global catches
+
+app.use(function(err , req , res , next){  // 4 input parameter, always at the last of code unline express.json()
+    //errCount++;  to keep track of error, server is hitting
+    console.error(err);   // log the error for debugging
+    res.json({
+        msg: "sorry something is up with our server"
+    })
+})
