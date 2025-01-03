@@ -18,7 +18,7 @@ function userAuth(req ,res, next){
 
 function kidneyAuth(req ,res, next){
     const kidneyId = req.query.kidneyId;
-    if(kidneyId != 1 && kidneyId != 2){
+    if(kidneyId != 1 && kidneyId != 2){   //This is very hard to scale What if you expect a complicated input? , This is where zod comes into the picture
             res.status(400).json("Invalid Input")        
     }
     else {
