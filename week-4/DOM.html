@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    function buttonDiv(){
+        const a = document.getElementById("firstNumber").value;
+        const b = document.getElementById("secondNumber").value;
+        // const element = document.getElementById("finalSum")
+        // element.innerHTML = parseInt(a) + parseInt(b);
+        fetch("http://localhost:3009/?a=" + a + "&b=" + b)
+          .then(function(response){
+            response.text()
+              .then(function(ans){
+                document.getElementById("finalSum").innerHTML = ans;
+              })
+          });
+    }
+    let timeout;
+    function debounceButtonDiv(){
+
+    // clear the previous clock and then starts new clock whenever called
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+            buttonDiv2()
+        }, 1000)
+    
+    }
+
+    async function buttonDiv2(){
+        const a = document.getElementById("firstNumber").value;
+        const b = document.getElementById("secondNumber").value;
+
+        const response = await fetch("http://localhost:3009/?a=" + a + "&b=" + b)
+        const ans = await response.text()
+        document.getElementById("finalSum").innerHTML = ans;
+    }
+</script>
+<body>
+    <div>
+        <input oninput = "debounceButtonDiv()" id="firstNumber" type="text" placeholder="first number">
+        <br>
+        <input oninput = "debounceButtonDiv()" id="secondNumber" type="text" placeholder="second number">
+        <br>
+        <!-- <button onclick="buttonDiv2()">Calculate sum</button> -->
+        <br>
+        <div id="finalSum"></div>
+    </div>
+</body>
+</html>
+
+<!-- debouncing = waiting for user to finish type instead of send n no. of req -->
